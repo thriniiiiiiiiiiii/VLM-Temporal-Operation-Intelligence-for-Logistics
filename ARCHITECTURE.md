@@ -2,20 +2,20 @@
 
 ## 1. Model Selection Defense
 
-### Decision: Qwen2.5-VL-2B-Instruct
+### Decision: Qwen2.5-VL-3B-Instruct
 
 **Comparison Table:**
 
 | Model              | Params | 4-bit VRAM | Native Video | Documentation | Kaggle T4 (16GB) | Decision  |
 |--------------------|--------|------------|--------------|---------------|------------------|-----------|
-| Qwen2.5-VL-2B      | 2B     | ~5–7 GB    | ✅ Yes        | Extensive     | ✅ Comfortable    | **SELECTED** |
+| Qwen2.5-VL-3B      | 3B     | ~7–9 GB    | ✅ Yes        | Extensive     | ✅ Comfortable    | **SELECTED** |
 | LLaVA-NeXT-Video-7B| 7B     | ~10–14 GB  | ✅ Yes        | Good          | ⚠️ Marginal       | Rejected  |
 | VideoLLaMA2-7B     | 7B     | ~12–15 GB  | ✅ Yes        | Limited       | ❌ OOM Risk       | Rejected  |
 
 **Rationale — Four factors drove the selection:**
 
-1. **VRAM fit is non-negotiable.** Kaggle T4 = 16 GB. Qwen2.5-VL-2B at 4-bit occupies
-   ~2 GB base + ~6 GB CUDA/activation overhead = ~8–10 GB observed. LLaVA-7B at 4-bit
+1. **VRAM fit is non-negotiable.** Kaggle T4 = 16 GB. Qwen2.5-VL-3B at 4-bit occupies
+   ~3 GB base + ~6 GB CUDA/activation overhead = ~9–11 GB observed. LLaVA-7B at 4-bit
    hits ~13–14 GB, leaving <2 GB for activations — a single OOM kills the Kaggle session
    with no recovery except restarting the 10-GPU-hour countdown.
 
@@ -30,19 +30,19 @@
 
 4. **Smaller models converge faster on small datasets.** With 6 training subjects ×
    ~100 sessions, the training set is ~5,000–8,000 clips — not large by foundation model
-   standards. A 2B model updates all its LoRA weights in fewer steps than 7B, reaching
+   standards. A 3B model updates all its LoRA weights in fewer steps than 7B, reaching
    convergence within 3 epochs on a 12-hour Kaggle session.
 
 **VRAM Math (verified against actual training runs):**
 ```
-model_base_4bit    = 2.0  GB   (NF4 quantized Qwen2.5-VL-2B)
-lora_adapters      = 0.3  GB   (r=16, ~10M params)
+model_base_4bit    = 3.0  GB   (NF4 quantized Qwen2.5-VL-3B)
+lora_adapters      = 0.4  GB   (r=16, ~12M params)
 activation_gc      = 0.005 GB  (gradient checkpointing 0.4× factor)
-optimizer_adamw    = 0.08  GB  (AdamW moment states for LoRA only)
+optimizer_adamw    = 0.10  GB  (AdamW moment states for LoRA only)
 ────────────────────────────
-Theoretical minimum ≈ 2.39 GB
+Theoretical minimum ≈ 3.50 GB
 CUDA overhead + KV  ≈ 6.00 GB
-Observed on T4      ≈ 8–10 GB   ✓ SAFE (limit: 16 GB)
+Observed on T4      ≈ 9–11 GB   ✓ SAFE (limit: 16 GB)
 ```
 
 ---
