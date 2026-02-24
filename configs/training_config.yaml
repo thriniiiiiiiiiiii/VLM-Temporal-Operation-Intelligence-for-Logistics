@@ -75,16 +75,16 @@ data:
   num_sample_clips: 20
 
 # ── VRAM Budget Verification ──────────────────────────────────────────────────
-# model_base_4bit  = 2.0 GB
+# model_base_4bit  = 3.0 GB
 # lora_adapters    = 0.3 GB
 # frames_per_clip  = 8
 # frame_tokens     = 256
 # batch_size       = 2
-# hidden_dim       = 1536
-# activation_gb    = (8 × 256 × 2 × 1536 × 2) / 1e9 = 0.0126 GB
-# grad_ckpt_factor = 0.4  → 0.005 GB
+# hidden_dim       = 2048
+# activation_gb    = (8 × 256 × 2 × 2048 × 2) / 1e9 = 0.0167 GB
+# grad_ckpt_factor = 0.4  → 0.006 GB
 # optimizer_gb     = 0.08 GB (AdamW states for LoRA params only)
-# TOTAL ESTIMATE   ≈ 2.39 GB base + overhead ≈ 8-10 GB observed
+# TOTAL ESTIMATE   ≈ 3.39 GB base + overhead ≈ 8-10 GB observed
 # T4 limit         = 16 GB → SAFE
 
 # ── Inference Configuration ───────────────────────────────────────────────────
