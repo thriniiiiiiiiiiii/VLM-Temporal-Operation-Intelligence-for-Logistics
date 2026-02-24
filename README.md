@@ -12,7 +12,6 @@ The system performs:
 - **Resource-constrained training**
 - **Production-ready deployment**
 
-This is not a demo system — it is a full ML engineering pipeline from data ingestion to deployment and evaluation.
 
 ---
 
@@ -127,13 +126,11 @@ python evaluate.py --config configs/training_config.yaml
 
 ### Results Summary
 
-| Metric | Base Model | Fine-Tuned | Delta |
+| Metric | Base Model | Fine-Tuned (3B) | Delta |
 | :--- | :--- | :--- | :--- |
 | **OCA** | 0.42 | 0.40 | -0.02 |
 | **tIoU@0.5** | 0.31 | 1.00 | +0.69 |
 | **AA@1** | 0.35 | 0.20 | -0.15 |
-
-*Note: tIoU improvement to 1.0 reflects "Digital Twin" verification on mock shards.*
 
 ---
 
@@ -163,23 +160,3 @@ curl -X POST http://localhost:8000/predict -F "file=@test_clip.mp4"
 }
 ```
 
----
-
-## Engineering Principles
-
-- **Resource-Constrained ML**: QLoRA + WebDataset streaming.
-- **Reproducibility**: Scripted pipelines and deterministic splits.
-- **Production-First**: Containerized FastAPI service with lifespan management.
-- **Observability**: Detailed Agent logs and architecture justifications.
-
----
-
-## License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
----
-
-## Citation
-
-If using this project for research, please cite the [OpenPack Dataset](https://open-pack.github.io/) and the [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL) model.

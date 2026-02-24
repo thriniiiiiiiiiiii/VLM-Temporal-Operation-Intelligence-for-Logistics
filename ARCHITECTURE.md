@@ -310,4 +310,4 @@ Instead of waiting for multi-hour downloads or access approvals, we constructed 
 2.  **API Readiness**: The sliding-window inference logic and `/analyze` timelines were stressed-tested against known synthetic transitions.
 3.  **Risk Mitigation**: This approach ensures a **Submission-Ready Framework** where the real data can be "hot-swapped" in as soon as it is available, with zero changes to code logic. 
 
-**Senior Engineer Note**: In industrial deployments, the model training is often the easiest part; the robust data-handling and serving architecture (presented here) is the foundation of a successful ML system.
+
