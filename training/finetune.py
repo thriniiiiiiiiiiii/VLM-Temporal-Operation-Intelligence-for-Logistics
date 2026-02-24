@@ -38,8 +38,9 @@ from PIL import Image
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
     AutoProcessor,
+    AutoModelForVision2Seq,
     BitsAndBytesConfig,
-    Qwen2VLForConditionalGeneration,
+    Trainer,
     TrainingArguments,
 )
 from trl import SFTTrainer
@@ -272,6 +273,10 @@ class VLMCollator:
             # Prepare messages format for Qwen2-VL
             messages = []
             for t, imgs in zip(texts, images):
+                # Ensure text contains vision markers if missing
+                if "<|vision_start|>" not in t:
+                    t = "<|vision_start|><|video_start|><|video_end|><|vision_end|>" + t
+                
                 content = [{"type": "text", "text": t}]
                 for img in imgs:
                     content.append({"type": "image", "image": img})
@@ -279,17 +284,19 @@ class VLMCollator:
             
             vision_inputs, _ = process_vision_info(messages)
             
+            # Use the processor's __call__ which is more robust than tokenizer
             inputs = self.processor(
                 text=texts,
-                images=vision_inputs["images"] if "images" in vision_inputs else None,
-                videos=vision_inputs["videos"] if "videos" in vision_inputs else None,
+                images=vision_inputs.get("images"),
+                videos=vision_inputs.get("videos"),
                 padding="max_length",
                 max_length=self.max_length,
                 truncation=True,
                 return_tensors="pt",
             )
         except Exception as e:
-            logger.warning(f"Processor fallback to text-only (multimodal failed): {e}")
+            logger.warning(f"Processor fallback (multimodal failed): {e}")
+            # Ensure we at least return valid tensors for the trainer
             inputs = self.processor(
                 text=texts,
                 padding="max_length",
@@ -312,7 +319,7 @@ def build_model_and_processor(config: dict):
     model_id = config["model"]["base_id"]
 
     logger.info(f"Loading base model: {model_id}")
-    model = Qwen2VLForConditionalGeneration.from_pretrained(
+    model = AutoModelForVision2Seq.from_pretrained(
         model_id,
         quantization_config=build_bnb_config(),
         device_map="auto",
