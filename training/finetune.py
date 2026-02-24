@@ -38,8 +38,7 @@ from PIL import Image
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
     AutoProcessor,
-    AutoModelForVision2Seq,
-    BitsAndBytesConfig,
+    Qwen2VLForConditionalGeneration,
     Trainer,
     TrainingArguments,
 )
@@ -319,7 +318,7 @@ def build_model_and_processor(config: dict):
     model_id = config["model"]["base_id"]
 
     logger.info(f"Loading base model: {model_id}")
-    model = AutoModelForVision2Seq.from_pretrained(
+    model = Qwen2VLForConditionalGeneration.from_pretrained(
         model_id,
         quantization_config=build_bnb_config(),
         device_map="auto",
