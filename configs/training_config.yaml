@@ -1,6 +1,6 @@
 # ── Model Configuration ───────────────────────────────────────────────────────
 model:
-  base_id: "Qwen/Qwen2.5-VL-2B-Instruct"
+  base_id: "Qwen/Qwen2.5-VL-3B-Instruct"
   cache_dir: "/root/.cache/huggingface"
   trust_remote_code: true
 
