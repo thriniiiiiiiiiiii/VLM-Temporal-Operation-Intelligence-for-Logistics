@@ -414,6 +414,15 @@ def train(config_path: str = "configs/training_config.yaml"):
             logger.info(f"Resuming from checkpoint: {checkpoint}")
 
     logger.info("Starting training...")
+    
+    # Monkeypatch for 'AdamW' has no attribute 'train' (occurs in some accelerate versions)
+    # We create the optimizer first to apply the patch if needed
+    trainer.create_optimizer()
+    if hasattr(trainer, "optimizer") and not hasattr(trainer.optimizer, "train"):
+        def dummy_train(): pass
+        trainer.optimizer.train = dummy_train
+        logger.info("Applied dummy .train() patch to optimizer for accelerate compatibility")
+
     trainer.train(resume_from_checkpoint=checkpoint)
 
     # Save final model
