@@ -50,7 +50,7 @@ at startup. Requirements:
 **Accepted:** Core pattern as-is
 **Modified:** Added `_stats` dict for request counting, moved config load outside lifespan
 **Time saved:** ~20 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
@@ -83,7 +83,7 @@ Context manager support (__enter__/__exit__).
              had no boundary-aware logic, which is the key differentiator
              from uniform sampling
 **Time saved:** ~15 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
@@ -104,7 +104,7 @@ Write an annotation parser for OpenPack dataset that:
 **Modified:** Added path patterns for Kinect video discovery (glob patterns),
              added "Unknown" normalization for out-of-vocabulary labels
 **Time saved:** ~40 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
@@ -146,7 +146,7 @@ Write a PyTorch collator for Qwen2.5-VL that handles:
 **Modified:** Added try/except around qwen_vl_utils import (environment resilience),
              added `remove_unused_columns=False` reminder comment
 **Time saved:** ~20 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
@@ -169,7 +169,7 @@ Write a PyTorch collator for Qwen2.5-VL that handles:
 - Verified VRAM math and training logic for Kaggle deployment.
 - Updated `ARCHITECTURE.md` with reproducibility instructions.
 **Time saved:** ~120 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
@@ -189,7 +189,7 @@ Write a PyTorch collator for Qwen2.5-VL that handles:
 - Patched `finetune.ipynb` with live Kaggle URL: https://www.kaggle.com/code/thrinainiaroori/finetune
 - Fixed `cv2` → `_cv2` bug in `api/main.py` `analyze_video` route.
 **Time saved:** ~150 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
@@ -205,7 +205,7 @@ Use defaultdict, handle missing classes gracefully.
 **Output:** `per_class_accuracy()` function
 **Accepted:** As-is (clean implementation)
 **Time saved:** ~10 minutes
-**Commit:** `23ad9bd`
+**Commit:** `6bff971`
 
 ---
 
