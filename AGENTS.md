@@ -282,4 +282,4 @@ clip extraction, workflow grammar encoding in prompts) were designed manually.
 - Generated final evaluation metrics (OCA, tIoU, AA@1) using a notebook-side benchmark on mock shards.
 - Synchronized `results.json` with final metrics: OCA=0.4, tIoU=1.0, AA@1=0.2.
 **Time saved:** ~240 minutes
-**Commit:** `f8357f2`
+**Commit:** `50b45e2`
