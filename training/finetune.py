@@ -257,26 +257,39 @@ class VLMCollator:
     def __init__(self, processor, max_length: int = 2048):
         self.processor  = processor
         self.max_length = max_length
-        # Safely resolve tokenizer (newer transformers return it directly from AutoProcessor)
+        # Safely resolve tokenizer
         self.tokenizer = getattr(processor, "tokenizer", processor)
+        if not hasattr(self.tokenizer, "pad_token_id") and hasattr(processor, "tokenizer"):
+            self.tokenizer = processor.tokenizer
 
     def __call__(self, batch: list[dict]) -> dict:
         texts  = [b["text"]   for b in batch]
         images = [b["images"] for b in batch]  # list of lists
 
         try:
-            # Most robust way: use the processor on the texts and images
-            # Processor handles visual token placement and padding
+            from qwen_vl_utils import process_vision_info
+            
+            # Prepare messages format for Qwen2-VL
+            messages = []
+            for t, imgs in zip(texts, images):
+                content = [{"type": "text", "text": t}]
+                for img in imgs:
+                    content.append({"type": "image", "image": img})
+                messages.append({"role": "user", "content": content})
+            
+            vision_inputs, _ = process_vision_info(messages)
+            
             inputs = self.processor(
                 text=texts,
-                images=images,
+                images=vision_inputs["images"] if "images" in vision_inputs else None,
+                videos=vision_inputs["videos"] if "videos" in vision_inputs else None,
                 padding="max_length",
                 max_length=self.max_length,
                 truncation=True,
                 return_tensors="pt",
             )
         except Exception as e:
-            logger.warning(f"Processor fallback to text-only: {e}")
+            logger.warning(f"Processor fallback to text-only (multimodal failed): {e}")
             inputs = self.processor(
                 text=texts,
                 padding="max_length",
