@@ -173,8 +173,6 @@ class PredictionResponse(BaseModel):
     temporal_segment:          TemporalSegment
     anticipated_next_operation: str
     confidence:                float = Field(..., ge=0.0, le=1.0)
-    latency_ms:                int
-    model_version:             str
 
 
 class ErrorResponse(BaseModel):
@@ -373,8 +371,6 @@ async def predict(
                 ),
                 anticipated_next_operation = result["anticipated_next_operation"],
                 confidence                = result["confidence"],
-                latency_ms                = latency,
-                model_version             = ADAPTER_PATH or CONFIG["model"]["base_id"],
             )
 
         except ValueError as e:
