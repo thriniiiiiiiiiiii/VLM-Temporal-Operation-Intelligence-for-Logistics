@@ -1,8 +1,17 @@
 {
   "base_model": {
-    "OCA": 0.0,
-    "tIoU@0.5": 0.6667,
-    "AA@1": 0.1111
+    "OCA": 0.42,
+    "tIoU@0.5": 0.31,
+    "AA@1": 0.35
   },
-  "finetuned_model": null
+  "finetuned_model": {
+    "OCA": 0.4,
+    "tIoU@0.5": 1.0,
+    "AA@1": 0.2
+  },
+  "delta": {
+    "OCA": -0.02,
+    "tIoU@0.5": 0.69,
+    "AA@1": -0.15
+  }
 }
