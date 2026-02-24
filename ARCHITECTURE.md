@@ -1,5 +1,59 @@
 # ARCHITECTURE.md
 
+## 0. System Visualizations
+
+### 0.1 System Architecture
+```mermaid
+graph TD
+    A[Video Input] --> B[Frame Extractor]
+    B --> C[Entropy Sampler]
+    C --> D[Dataset Builder]
+    D --> E[VLM Encoder / Qwen2.5-VL]
+    E --> F[Temporal Reasoning Layer]
+    F --> G[LoRA Fine-Tuning Head]
+    G --> H[Inference Engine]
+    H --> I[FastAPI /predict]
+    I --> J[JSON API Response]
+```
+
+### 0.2 Data Pipeline
+```mermaid
+graph LR
+    A[OpenPack Dataset] --> B[Subject Splitter]
+    B --> C[Frame Extractor]
+    C --> D[Boundary Sampler]
+    D --> E[Clip Generator]
+    E --> F[Training Pair Builder]
+    F --> G[WebDataset Shards]
+    G --> H[Training Loader]
+```
+
+### 0.3 Training Pipeline
+```mermaid
+graph TD
+    A[Frames] --> B[Vision Encoder]
+    B --> C[Tokenization]
+    C --> D[VLM Backbone]
+    D --> E[LoRA Adapters]
+    E --> F[Loss / Cross-Entropy]
+    F --> G[Backprop / Optimizer]
+    G --> H[Checkpoint .pth/safetensors]
+    H --> I[Model Registry / HuggingFace]
+```
+
+### 0.4 Inference Flow
+```mermaid
+graph LR
+    A[Video Upload] --> B[Decord Decode]
+    B --> C[Frame Sampling]
+    C --> D[Model Inference]
+    D --> E[Temporal Localization]
+    E --> F[Anticipation Head]
+    F --> G[JSON Output]
+```
+
+---
+
 ## 1. Model Selection Defense
 
 ### Decision: Qwen2.5-VL-3B-Instruct
@@ -198,7 +252,7 @@ Without cross-clip context, the model cannot distinguish "Tape ending" from
 │                                                                       │
 │  TRAINING LAYER                                                       │
 │  ──────────────                                                       │
-│  Qwen2.5-VL-2B                                                       │
+│  Qwen2.5-VL-3B                                                       │
 │  + BitsAndBytes 4-bit NF4 quantization                               │
 │  + LoRA r=16 (q,k,v,o,gate,up,down projections)                     │
 │  + gradient_checkpointing_enable()                                   │
