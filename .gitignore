@@ -1,0 +1,46 @@
+# Large files
+*.tar
+*.tar.gz
+*.zip
+*.h5
+*.bin
+*.safetensors
+*.gguf
+
+# Model weights & caches
+checkpoints/
+hf-cache/
+.cache/
+__pycache__/
+*.pyc
+
+# Raw data (too large for git)
+data/raw/
+mock_data/
+mock_shards/
+
+# System
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+
+# Env
+.env
+*.env
+venv/
+.venv/
+
+# Logs
+*.log
+wandb/
+runs/
+
+# Research / temp artifacts (not for submission)
+zenodo*.json
+temp_sample_repo/
+*.debug.csv

@@ -1,0 +1,8 @@
+{
+  "base_model": {
+    "OCA": 0.0,
+    "tIoU@0.5": 0.6667,
+    "AA@1": 0.1111
+  },
+  "finetuned_model": null
+}

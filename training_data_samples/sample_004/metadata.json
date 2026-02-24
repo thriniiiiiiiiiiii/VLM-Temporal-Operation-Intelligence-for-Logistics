@@ -1,0 +1,38 @@
+{
+  "clip_id": "U0101_S0100_t0006040_end_boundary",
+  "subject": "U0101",
+  "session": "S0100",
+  "sampled_frame_indices": [
+    0,
+    26,
+    41,
+    48,
+    61,
+    71,
+    78,
+    87
+  ],
+  "target": {
+    "dominant_operation": "Put Items",
+    "temporal_segment": {
+      "start_frame": 0,
+      "end_frame": 87
+    },
+    "anticipated_next_operation": "Unknown",
+    "confidence": 1.0
+  },
+  "conversation": [
+    {
+      "role": "system",
+      "content": "You are a warehouse operations temporal analyst. You will be shown 8 frames sampled from a 5-second video clip of a packaging worker. The frames are in temporal order.\n\nAnalyze the visual sequence and respond ONLY with a valid JSON object containing:\n- \"dominant_operation\": the primary operation in this clip. Must be exactly one of: Box Setup, Inner Packing, Tape, Put Items, Pack, Wrap, Label, Final Check, Idle, Unknown\n- \"temporal_segment\": {\"start_frame\": <int 1-125>, \"end_frame\": <int 1-125>} where the operation occupies the clip\n- \"anticipated_next_operation\": the next operation that will follow based on workflow grammar. Must be exactly one of the operation classes listed above\n- \"confidence\": float between 0.0 and 1.0\n\nExample response:\n{\"dominant_operation\": \"Tape\", \"temporal_segment\": {\"start_frame\": 14, \"end_frame\": 98}, \"anticipated_next_operation\": \"Put Items\", \"confidence\": 0.87}"
+    },
+    {
+      "role": "user",
+      "content": "[8 frames + text query]"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"dominant_operation\": \"Put Items\", \"temporal_segment\": {\"start_frame\": 0, \"end_frame\": 87}, \"anticipated_next_operation\": \"Unknown\", \"confidence\": 1.0}"
+    }
+  ]
+}

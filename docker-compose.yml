@@ -1,0 +1,84 @@
+version: "3.9"
+
+services:
+  # ── Base Model API (zero-shot inference) ────────────────────────────────────
+  vlm-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vlm-temporal-api
+    ports:
+      - "8000:8000"
+    environment:
+      - CONFIG_PATH=/app/configs/training_config.yaml
+      - TRANSFORMERS_CACHE=/cache/huggingface
+      - HF_HOME=/cache/huggingface
+      - HF_TOKEN=${HF_TOKEN:-""}               # Optional: for gated models
+      - MAX_CONCURRENT_REQUESTS=2
+      - ADAPTER_PATH=${ADAPTER_PATH:-""}        # Override to load fine-tuned model
+    volumes:
+      - hf-cache:/cache/huggingface             # Persist downloaded model weights
+      - ./checkpoints:/app/checkpoints:ro       # Mount fine-tuned adapters
+      - ./configs:/app/configs:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 180s    # Model load takes ~2 minutes cold start
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # ── Fine-tuned Model API (swap adapter path) ─────────────────────────────────
+  vlm-api-finetuned:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vlm-temporal-api-finetuned
+    ports:
+      - "8001:8000"
+    environment:
+      - CONFIG_PATH=/app/configs/training_config.yaml
+      - TRANSFORMERS_CACHE=/cache/huggingface
+      - HF_HOME=/cache/huggingface
+      - ADAPTER_PATH=/app/checkpoints/final
+      - MAX_CONCURRENT_REQUESTS=2
+    volumes:
+      - hf-cache:/cache/huggingface
+      - ./checkpoints:/app/checkpoints:ro
+      - ./configs:/app/configs:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+    profiles:
+      - finetuned    # Only starts with: docker-compose --profile finetuned up
+
+volumes:
+  hf-cache:
+    driver: local
+
+# ── Quick-start commands ─────────────────────────────────────────────────────
+# Base model:      docker-compose up vlm-api
+# Fine-tuned:      ADAPTER_PATH=./checkpoints/final docker-compose up vlm-api
+# Both services:   docker-compose --profile finetuned up
+#
+# Test prediction:
+#   curl -X POST http://localhost:8000/predict \
+#     -F "file=@sample_clip.mp4" \
+#     -F "clip_id=test_001"

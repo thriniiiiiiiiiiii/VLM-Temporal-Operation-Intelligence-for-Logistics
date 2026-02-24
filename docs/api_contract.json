@@ -1,0 +1,35 @@
+{
+    "endpoints": [
+        {
+            "path": "/health",
+            "method": "GET",
+            "response": {
+                "status": "string",
+                "model_loaded": "boolean"
+            }
+        },
+        {
+            "path": "/predict",
+            "method": "POST",
+            "request": {
+                "file": "file (mp4)",
+                "clip_id": "string (optional)"
+            },
+            "response": {
+                "clip_id": "string",
+                "dominant_operation": "string",
+                "temporal_segment": {
+                    "start_frame": "integer",
+                    "end_frame": "integer"
+                },
+                "anticipated_next_operation": "string",
+                "confidence": "float",
+                "latency_ms": "integer"
+            }
+        }
+    ],
+    "limits": {
+        "max_video_duration": "5m",
+        "concurrency": 4
+    }
+}

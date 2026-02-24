@@ -1,0 +1,162 @@
+[
+  {
+    "idx": 0,
+    "clip_id": "U0101_S0100_t0000000_start_boundary",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 1,
+    "clip_id": "U0101_S0100_t0006040_start_boundary",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 37,
+    "end_frame": 125
+  },
+  {
+    "idx": 2,
+    "clip_id": "U0101_S0100_t0002000_start_boundary",
+    "operation": "Tape",
+    "next_op": "Put Items",
+    "start_frame": 37,
+    "end_frame": 125
+  },
+  {
+    "idx": 3,
+    "clip_id": "U0101_S0100_t0000000_end_boundary",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 4,
+    "clip_id": "U0101_S0100_t0006040_end_boundary",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 0,
+    "end_frame": 87
+  },
+  {
+    "idx": 5,
+    "clip_id": "U0101_S0100_t0002000_end_boundary",
+    "operation": "Tape",
+    "next_op": "Put Items",
+    "start_frame": 0,
+    "end_frame": 87
+  },
+  {
+    "idx": 6,
+    "clip_id": "U0101_S0100_t0000000_mid_operation",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 7,
+    "clip_id": "U0101_S0100_t0006040_mid_operation",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 13,
+    "end_frame": 111
+  },
+  {
+    "idx": 8,
+    "clip_id": "U0101_S0100_t0002000_mid_operation",
+    "operation": "Tape",
+    "next_op": "Put Items",
+    "start_frame": 12,
+    "end_frame": 112
+  },
+  {
+    "idx": 9,
+    "clip_id": "U0102_S0100_t0000000_start_boundary",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 10,
+    "clip_id": "U0102_S0100_t0006040_start_boundary",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 37,
+    "end_frame": 125
+  },
+  {
+    "idx": 11,
+    "clip_id": "U0102_S0100_t0002000_start_boundary",
+    "operation": "Tape",
+    "next_op": "Put Items",
+    "start_frame": 37,
+    "end_frame": 125
+  },
+  {
+    "idx": 12,
+    "clip_id": "U0102_S0100_t0000000_end_boundary",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 13,
+    "clip_id": "U0102_S0100_t0006040_end_boundary",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 0,
+    "end_frame": 87
+  },
+  {
+    "idx": 14,
+    "clip_id": "U0102_S0100_t0002000_end_boundary",
+    "operation": "Tape",
+    "next_op": "Put Items",
+    "start_frame": 0,
+    "end_frame": 87
+  },
+  {
+    "idx": 15,
+    "clip_id": "U0102_S0100_t0000000_mid_operation",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 16,
+    "clip_id": "U0102_S0100_t0006040_mid_operation",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 13,
+    "end_frame": 111
+  },
+  {
+    "idx": 17,
+    "clip_id": "U0102_S0100_t0002000_mid_operation",
+    "operation": "Tape",
+    "next_op": "Put Items",
+    "start_frame": 12,
+    "end_frame": 112
+  },
+  {
+    "idx": 18,
+    "clip_id": "U0103_S0100_t0000000_start_boundary",
+    "operation": "Box Setup",
+    "next_op": "Tape",
+    "start_frame": 0,
+    "end_frame": 49
+  },
+  {
+    "idx": 19,
+    "clip_id": "U0103_S0100_t0006040_start_boundary",
+    "operation": "Put Items",
+    "next_op": "Unknown",
+    "start_frame": 37,
+    "end_frame": 125
+  }
+]
