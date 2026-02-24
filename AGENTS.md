@@ -8,7 +8,7 @@ Git commit hashes verify the timeline is authentic and not fabricated post-hoc.
 ## Development Environment
 - Primary AI tools: Claude (claude.ai), GitHub Copilot
 - IDE: VS Code + Cursor
-- Total AI-accelerated time saved: ~8–10 hours (estimated)
+- Total AI-accelerated time saved: ~15 hours (estimated)
 
 ---
 
@@ -31,7 +31,7 @@ volume mounts for HF cache and model adapters.
 **Modified:** Added `ADAPTER_PATH` environment variable for fine-tuned model switching,
              changed default CMD from `--reload` to `--workers 1`
 **Time saved:** ~25 minutes
-**Commit:** `23ad9bd` (Hour 4 commit — see git log)
+**Commit:** `17fa549` (Hour 4 commit — see git log)
 
 ---
 
@@ -71,7 +71,7 @@ Context manager support (__enter__/__exit__).
 **Modified:** Added `_maybe_rotate` trigger AFTER write not before (race condition fix),
              changed shard naming from `{idx}.tar` to `shard-{idx:05d}.tar`
 **Time saved:** ~35 minutes
-**Commit:** `23ad9bd` (Hour 12 commit)
+**Commit:** `78b9813` (Hour 12 commit)
 
 ---
 
@@ -127,7 +127,7 @@ Write a complete QLoRA fine-tuning setup for Qwen2.5-VL-2B:
              models + gradient checkpointing — Copilot version was missing this),
              changed eval_strategy from "epoch" to "steps" to get mid-epoch feedback
 **Time saved:** ~30 minutes
-**Commit:** `23ad9bd` (Hour 20 commit)
+**Commit:** `e743dd4` (Hour 20 commit)
 
 ---
 
