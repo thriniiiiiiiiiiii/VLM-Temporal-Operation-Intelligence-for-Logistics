@@ -4,10 +4,10 @@ torchvision==0.17.2
 torchaudio==2.2.2
 
 # ── VLM / Transformers ────────────────────────────────────────────────────────
-transformers==4.45.2
+transformers==4.47.0
 accelerate==0.30.1
 peft==0.10.0
-bitsandbytes==0.43.1
+bitsandbytes==0.45.3
 trl==0.8.6
 qwen-vl-utils==0.0.8
 einops==0.8.0
