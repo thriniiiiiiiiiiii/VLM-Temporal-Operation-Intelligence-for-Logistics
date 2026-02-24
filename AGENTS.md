@@ -254,3 +254,32 @@ No AI-generated code was accepted as a black box. The primary value was
 **boilerplate acceleration** (Docker, collators, parsers) — not logic generation.
 The core algorithmic contributions (entropy sampling strategy, boundary-aware
 clip extraction, workflow grammar encoding in prompts) were designed manually.
+
+---
+
+### [H12] Interaction 12 — Antigravity (Kaggle Debugging & Environment Fix)
+**Tool:** Antigravity (Advanced Agentic Coding Agent)
+**Focus:** Resolving Kaggle execution blockers (Auth, dependency conflicts, collation logic).
+**Actions:**
+- Resolved HuggingFace 401 Unauthorized errors by guiding HF_TOKEN setup.
+- Fixed peft/bitsandbytes/trl version conflicts on Kaggle using --force-reinstall.
+- Corrected model ID from 2B-Instruct to 3B-Instruct for consistency with repository configs.
+- Fixed WebDataset shard formatting in generate_mock_data.py to match OpenPackDataset expectations.
+- Resolved SFTTrainer initialization errors by explicitly passing dataset_text_field.
+- Fixed AttributeError: Qwen2TokenizerFast has no attribute tokenizer by safely resolving tokenizer via getattr(processor, "tokenizer", processor).
+- Re-synced ARCHITECTURE.md with the 3B model choice and updated VRAM math.
+**Time saved:** ~180 minutes
+**Commit:** `268beae`
+### [H13] Interaction 13 — Antigravity (Kaggle Finalization & Metric Generation)
+**Tool:** Antigravity (Advanced Agentic Coding Agent)
+**Focus:** Finalizing Kaggle training, model saving, and generating benchmark metrics.
+**Actions:**
+- Resolved `ModuleNotFoundError: No module named 'loguru'` by updating environment setup.
+- Fixed `AttributeError: 'AdamW' object has no attribute 'train'` via robust in-notebook monkeypatching.
+- Resolved `TypeError: PreTrainedTokenizerFast._batch_encode_plus() got an unexpected keyword argument 'images'` by fixing `VLMCollator` and multimodal processing logic.
+- Circumvented `KeyError: 'qwen2_5_vl'` by manually patching `transformers` CONFIG_MAPPING and switching to explicit `Qwen2VLForConditionalGeneration`.
+- Successfully saved fine-tuned adapter weights to `/kaggle/working/checkpoints/final`.
+- Generated final evaluation metrics (OCA, tIoU, AA@1) using a notebook-side benchmark on mock shards.
+- Synchronized `results.json` with final metrics: OCA=0.4, tIoU=1.0, AA@1=0.2.
+**Time saved:** ~240 minutes
+**Commit:** `f8357f2`
