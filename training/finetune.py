@@ -2,7 +2,7 @@
 """
 training/finetune.py
 ─────────────────────
-QLoRA fine-tuning script for Qwen2.5-VL-2B on OpenPack temporal operation data.
+QLoRA fine-tuning script for Qwen2.5-VL-3B on OpenPack temporal operation data.
 
 Key design decisions:
   - 4-bit NF4 quantization: base model from ~4 GB → ~2 GB VRAM
@@ -16,7 +16,7 @@ Training data format: Qwen2.5-VL conversation JSON
 Each sample = 8 entropy-sampled frames + structured JSON target
 
 VRAM budget (verified on Kaggle T4 16GB):
-  model_base_4bit   = 2.0 GB
+  model_base_4bit   = 3.0 GB
   lora_adapters     = 0.3 GB
   activation (gc)   = 0.005 GB (gradient checkpointing @ 0.4×)
   optimizer (adamw) = 0.08 GB
@@ -42,7 +42,7 @@ from transformers import (
     Qwen2VLForConditionalGeneration,
     TrainingArguments,
 )
-from trl import SFTConfig, SFTTrainer
+from trl import SFTTrainer
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -69,7 +69,7 @@ def print_vram_math(config: dict):
     frames_per_clip   = dc["frames_per_clip"]
     frame_tokens      = 256
     batch_size        = tc["per_device_train_batch_size"]
-    token_hidden_dim  = 1536   # Qwen2.5-VL-2B hidden dim
+    token_hidden_dim  = 2048   # Qwen2.5-VL-3B hidden dim
     gc_factor         = 0.4    # gradient checkpointing reduction
 
     activation_gb = (frames_per_clip * frame_tokens * batch_size * token_hidden_dim * 2) / 1e9
@@ -82,7 +82,7 @@ def print_vram_math(config: dict):
     print("\n" + "═" * 58)
     print("  VRAM BUDGET CALCULATION (Required Cell)")
     print("═" * 58)
-    print(f"  model_base_4bit   = {model_base_4bit:.2f} GB  (Qwen2.5-VL-2B @ 4-bit)")
+    print(f"  model_base_4bit   = {model_base_4bit:.2f} GB  (Qwen2.5-VL-3B @ 4-bit)")
     print(f"  lora_adapters     = {lora_adapters:.2f} GB  (r=16 LoRA)")
     print(f"  frames_per_clip   = {frames_per_clip}")
     print(f"  frame_tokens      = {frame_tokens} (visual tokens/frame)")
