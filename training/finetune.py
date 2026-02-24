@@ -262,26 +262,21 @@ class VLMCollator:
         texts  = [b["text"]   for b in batch]
         images = [b["images"] for b in batch]  # list of lists
 
-        # Flatten image list for processor
-        flat_images = [img for imgs in images for img in imgs]
-
         try:
-            from qwen_vl_utils import process_vision_info
-            vision_inputs, _ = process_vision_info(
-                [{"role": "user", "content": [{"type": "image", "image": img} for img in flat_images]}]
-            )
+            # Most robust way: use the processor on the texts and images
+            # Processor handles visual token placement and padding
             inputs = self.processor(
                 text=texts,
-                images=vision_inputs,
+                images=images,
                 padding="max_length",
                 max_length=self.max_length,
                 truncation=True,
                 return_tensors="pt",
             )
-        except Exception:
+        except Exception as e:
+            logger.warning(f"Processor fallback to text-only: {e}")
             inputs = self.processor(
                 text=texts,
-                images=flat_images,
                 padding="max_length",
                 max_length=self.max_length,
                 truncation=True,
