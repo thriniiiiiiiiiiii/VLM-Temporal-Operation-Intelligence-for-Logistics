@@ -84,7 +84,7 @@ class VLMEngine:
         else:
             kwargs["torch_dtype"] = torch.float16
 
-        self.model = AutoModelForVision2Seq.from_pretrained(
+        self.model = Qwen2VLForConditionalGeneration.from_pretrained(
             self.model_path, **kwargs
         )
 
