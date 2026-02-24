@@ -257,6 +257,8 @@ class VLMCollator:
     def __init__(self, processor, max_length: int = 2048):
         self.processor  = processor
         self.max_length = max_length
+        # Safely resolve tokenizer (newer transformers return it directly from AutoProcessor)
+        self.tokenizer = getattr(processor, "tokenizer", processor)
 
     def __call__(self, batch: list[dict]) -> dict:
         texts  = [b["text"]   for b in batch]
@@ -285,7 +287,7 @@ class VLMCollator:
 
         # Labels = input_ids with padding tokens masked
         labels = inputs["input_ids"].clone()
-        labels[labels == self.processor.tokenizer.pad_token_id] = -100
+        labels[labels == self.tokenizer.pad_token_id] = -100
         inputs["labels"] = labels
         return dict(inputs)
 
@@ -318,8 +320,9 @@ def build_model_and_processor(config: dict):
         trust_remote_code=True,
     )
     # Ensure pad token is set
-    if processor.tokenizer.pad_token is None:
-        processor.tokenizer.pad_token = processor.tokenizer.eos_token
+    tokenizer = getattr(processor, "tokenizer", processor)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
 
     return model, processor
 
@@ -396,7 +399,7 @@ def train(config_path: str = "configs/training_config.yaml"):
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         data_collator=collator,
-        tokenizer=processor.tokenizer,
+        tokenizer=getattr(processor, "tokenizer", processor),
         dataset_text_field="text",
         max_seq_length=1024,
     )
