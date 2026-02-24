@@ -38,6 +38,7 @@ from PIL import Image
 from peft import LoraConfig, TaskType, get_peft_model
 from transformers import (
     AutoProcessor,
+    BitsAndBytesConfig,
     Qwen2VLForConditionalGeneration,
     Trainer,
     TrainingArguments,
