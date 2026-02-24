@@ -1,6 +1,5 @@
 # VLM Temporal Operation Intelligence for Logistics
-
-Professional-grade Vision-Language Model system for temporal segment understanding and procedural workflow modeling in industrial logistics environments.
+ Vision-Language Model system for temporal segment understanding and procedural workflow modeling in industrial logistics environments.
 
 This repository implements an end-to-end Vision-Language Model (VLM) pipeline for temporal operation understanding, procedural workflow modeling, and next-action anticipation in real-world logistics environments.
 
