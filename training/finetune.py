@@ -397,6 +397,8 @@ def train(config_path: str = "configs/training_config.yaml"):
         eval_dataset=val_dataset,
         data_collator=collator,
         tokenizer=processor.tokenizer,
+        dataset_text_field="text",
+        max_seq_length=1024,
     )
 
     # Resume from checkpoint if available
