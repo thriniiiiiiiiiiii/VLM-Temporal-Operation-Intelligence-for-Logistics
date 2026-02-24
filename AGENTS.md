@@ -282,7 +282,7 @@ clip extraction, workflow grammar encoding in prompts) were designed manually.
 - Generated final evaluation metrics (OCA, tIoU, AA@1) using a notebook-side benchmark on mock shards.
 - Synchronized `results.json` with final metrics: OCA=0.4, tIoU=1.0, AA@1=0.2.
 **Time saved:** ~240 minutes
-**Commit:** `ff31791`
+**Commit:** `19c3850`
 
 ### [H14] Interaction 14 — Antigravity (Refinement & Rubric Maximization)
 **Tool:** Antigravity (Advanced Agentic Coding Agent)
@@ -293,4 +293,17 @@ clip extraction, workflow grammar encoding in prompts) were designed manually.
 - Refined `ARCHITECTURE.md` with advanced sections on identity-leakage protection and "Digital Twin" verification rationale.
 - Conducted exhaustive repository cleanup to ensure a lean, production-ready deliverable.
 **Time saved:** ~90 minutes
-**Commit:** `01a9e06`
+**Commit:** `91e31eb`
+
+---
+
+### [H15] Interaction 15 \u2014 Antigravity (Definitive Notebook Stabilization)
+**Tool:** Antigravity (Advanced Agentic Coding Agent)
+**Focus:** Final synchronization of the primary `finetune.ipynb` with user-tested snippets.
+**Actions:**
+- Reverted all "submission" patches to restore the original clean notebook structure.
+- Integrated definitive dependency pinning (`peft==0.14.0`, `bitsandbytes==0.45.3`) and the SFTTrainer optimizer stability patch.
+- Successfully synchronized the repo with the user's preferred Kaggle link.
+- Final documentation audit across `ARCHITECTURE.md` and `README.md`.
+**Time saved:** ~60 minutes
+**Commit:** `fc7633d`
