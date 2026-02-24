@@ -56,7 +56,7 @@ graph LR
 
 ## 1. Model Selection Defense
 
-### Decision: Qwen2.5-VL-3B-Instruct
+### Decision: Qwen2.5-VL-3B-Instruct + 4-bit QLoRA
 
 **Comparison Table:**
 
@@ -68,7 +68,7 @@ graph LR
 
 **Rationale — Four factors drove the selection:**
 
-1. **VRAM fit is non-negotiable.** Kaggle T4 = 16 GB. Qwen2.5-VL-3B at 4-bit occupies
+1. **VRAM fit is non-negotiable.** model_base_4bit = 3.0 # GB — Qwen2.5-VL-3B at 4-bit NF4
    ~3 GB base + ~6 GB CUDA/activation overhead = ~9–11 GB observed. LLaVA-7B at 4-bit
    hits ~13–14 GB, leaving <2 GB for activations — a single OOM kills the Kaggle session
    with no recovery except restarting the 10-GPU-hour countdown.
