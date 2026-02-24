@@ -23,6 +23,7 @@ from loguru import logger
 from transformers import (
     Qwen2VLForConditionalGeneration,
     AutoProcessor,
+    Qwen2VLProcessor,
     BitsAndBytesConfig,
 )
 try:
@@ -100,6 +101,13 @@ class VLMEngine:
             self.model_path,
             trust_remote_code=True,
         )
+        # Ensure we have a real processor, not just a tokenizer
+        if not hasattr(self.processor, "image_processor"):
+             try:
+                 self.processor = Qwen2VLProcessor.from_pretrained(self.model_path, trust_remote_code=True)
+                 logger.info("AutoProcessor fallback: Loaded Qwen2VLProcessor explicitly")
+             except Exception as e:
+                 logger.warning(f"Could not load Qwen2VLProcessor: {e}")
 
         self.model.eval()
         logger.info(f"Model loaded in {time.time() - t0:.1f}s")
