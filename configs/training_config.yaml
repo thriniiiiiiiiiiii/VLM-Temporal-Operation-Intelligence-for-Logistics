@@ -45,12 +45,12 @@ training:
   dataloader_pin_memory: true
   # Checkpoint strategy — Kaggle sessions die after 12h
   save_strategy: "steps"
-  save_steps: 50
+  save_steps: 100
   save_total_limit: 3
   evaluation_strategy: "steps"
   eval_steps: 100
   logging_steps: 10
-  load_best_model_at_end: true
+  load_best_model_at_end: false
   metric_for_best_model: "eval_loss"
   report_to: "wandb"
   run_name: "vlm-openpack-qwen25-qloraV1"
