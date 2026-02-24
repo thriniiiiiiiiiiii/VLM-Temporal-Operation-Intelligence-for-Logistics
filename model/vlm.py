@@ -21,7 +21,7 @@ import torch
 from PIL import Image
 from loguru import logger
 from transformers import (
-    Qwen2VLForConditionalGeneration,
+    AutoModelForVision2Seq,
     AutoProcessor,
     BitsAndBytesConfig,
 )
