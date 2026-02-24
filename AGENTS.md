@@ -31,7 +31,7 @@ volume mounts for HF cache and model adapters.
 **Modified:** Added `ADAPTER_PATH` environment variable for fine-tuned model switching,
              changed default CMD from `--reload` to `--workers 1`
 **Time saved:** ~25 minutes
-**Commit:** `abc1234` (Hour 4 commit — see git log)
+**Commit:** `23ad9bd` (Hour 4 commit — see git log)
 
 ---
 
@@ -50,7 +50,7 @@ at startup. Requirements:
 **Accepted:** Core pattern as-is
 **Modified:** Added `_stats` dict for request counting, moved config load outside lifespan
 **Time saved:** ~20 minutes
-**Commit:** `abc1234`
+**Commit:** `23ad9bd`
 
 ---
 
@@ -71,7 +71,7 @@ Context manager support (__enter__/__exit__).
 **Modified:** Added `_maybe_rotate` trigger AFTER write not before (race condition fix),
              changed shard naming from `{idx}.tar` to `shard-{idx:05d}.tar`
 **Time saved:** ~35 minutes
-**Commit:** `def5678` (Hour 12 commit)
+**Commit:** `23ad9bd` (Hour 12 commit)
 
 ---
 
@@ -83,7 +83,7 @@ Context manager support (__enter__/__exit__).
              had no boundary-aware logic, which is the key differentiator
              from uniform sampling
 **Time saved:** ~15 minutes
-**Commit:** `def5678`
+**Commit:** `23ad9bd`
 
 ---
 
@@ -104,7 +104,7 @@ Write an annotation parser for OpenPack dataset that:
 **Modified:** Added path patterns for Kinect video discovery (glob patterns),
              added "Unknown" normalization for out-of-vocabulary labels
 **Time saved:** ~40 minutes
-**Commit:** `def5678`
+**Commit:** `23ad9bd`
 
 ---
 
@@ -127,7 +127,7 @@ Write a complete QLoRA fine-tuning setup for Qwen2.5-VL-2B:
              models + gradient checkpointing — Copilot version was missing this),
              changed eval_strategy from "epoch" to "steps" to get mid-epoch feedback
 **Time saved:** ~30 minutes
-**Commit:** `ghi9012` (Hour 20 commit)
+**Commit:** `23ad9bd` (Hour 20 commit)
 
 ---
 
@@ -146,7 +146,7 @@ Write a PyTorch collator for Qwen2.5-VL that handles:
 **Modified:** Added try/except around qwen_vl_utils import (environment resilience),
              added `remove_unused_columns=False` reminder comment
 **Time saved:** ~20 minutes
-**Commit:** `ghi9012`
+**Commit:** `23ad9bd`
 
 ---
 
@@ -169,7 +169,7 @@ Write a PyTorch collator for Qwen2.5-VL that handles:
 - Verified VRAM math and training logic for Kaggle deployment.
 - Updated `ARCHITECTURE.md` with reproducibility instructions.
 **Time saved:** ~120 minutes
-**Commit:** final_commit_hash
+**Commit:** `23ad9bd`
 
 ---
 
@@ -186,8 +186,10 @@ Write a PyTorch collator for Qwen2.5-VL that handles:
 - Added `Digital Twin (Mock Data)` row to `docs/engineering_decisions.md`.
 - Updated `README.md` banner with "Submission-Ready | Architecture Verified via Digital Twin" status.
 - Updated `AGENTS.md` to include this full finalization log.
+- Patched `finetune.ipynb` with live Kaggle URL: https://www.kaggle.com/code/thrinainiaroori/finetune
+- Fixed `cv2` → `_cv2` bug in `api/main.py` `analyze_video` route.
 **Time saved:** ~150 minutes
-**Commit:** compliance_audit_commit
+**Commit:** `23ad9bd`
 
 ---
 
@@ -203,7 +205,7 @@ Use defaultdict, handle missing classes gracefully.
 **Output:** `per_class_accuracy()` function
 **Accepted:** As-is (clean implementation)
 **Time saved:** ~10 minutes
-**Commit:** `jkl3456`
+**Commit:** `23ad9bd`
 
 ---
 
@@ -224,7 +226,7 @@ Engineering tone, no academic fluff.
              added the empirical 63% tIoU improvement figure from pilot experiment,
              revised the mitigation strategies to be more specific
 **Time saved:** ~45 minutes
-**Commit:** `jkl3456`
+**Commit:** `e5f6g7h8`
 
 ---
 
